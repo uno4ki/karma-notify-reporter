@@ -18,7 +18,7 @@ var messages = {
   error : {
     displayName : 'Aborted',
     title       : 'ERROR - %s',
-    message     : '',
+    message     : 'Tests aborted - %s',
     icon        : path.join(__dirname, 'images/error.png')
   },
   specFailed : {
@@ -47,7 +47,7 @@ var NotifyReporter = function(baseReporterDecorator, helper, logger, config, for
 
     if (results.disconnected || results.error) {
       msg = messages.error;
-      return notifier.notify(helper.merge(messages.error, {'title': util.format(msg.title, browser.name)}));
+      return notifier.notify(helper.merge(msg, {'message': util.format(msg.message, time), 'title': util.format(msg.title, browser.name)}));
     }
 
     if (results.failed) {
